@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akuifera</title>
+  <link rel="stylesheet" href="/akuifera/style.css">
+  <script src="/akuifera/config.js"></script>
+  <script>
+    // Setelah config dimuat, gunakan BASE_PATH agar wrapper bekerja walaupun
+    // GitHub Pages mengarahkan deep-link ke 404.html.
+    (function () {
+      try {
+        // Jika halaman ini dimuat akibat deep-link (mis. /akuifera/admin), kita
+        // mount langsung iframe sesuai dengan path saat ini.
+        var script = document.createElement('script');
+        script.src = '/akuifera/app.js';
+        document.head.appendChild(script);
+      } catch (e) {
+        // Fallback paling akhir: redirect ke root.
+        window.location.replace('/akuifera/');
+      }
+    })();
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=/akuifera/">
+  </noscript>
+</head>
+<body>
+  <div id="akf-frame-host"></div>
+</body>
+</html>
