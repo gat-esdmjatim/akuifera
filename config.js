@@ -6,7 +6,7 @@
  *
  * Contoh: 'https://script.google.com/macros/s/AKfycbxXXXXXXXXXXXXXXXXXXXXXX/exec'
  */
-var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw-vPkmx5cxAovC2eY5XDlBh4Z1oxI8agfkFn-n39RjQTC7IjDEtpWUfhFSzfN9Lhp1LQ/exec';
+var APPS_SCRIPT_URL = 'PASTE_URL_/exec_DARI_APPS_SCRIPT_DI_SINI';
 
 /**
  * Path dasar dari halaman GitHub Pages.
@@ -26,20 +26,14 @@ var ROUTES = {
   'admin':         'admin',
   'petugas':       'staff',
   'pimpinan':      'leader',
-  'ruang-tunggu':  'waiting',
-  'persiapan':     'preparation',
-  'feedback':      'feedback',
-  'laporan':       'report'
+  'feedback':      'feedback'
 };
 
 /**
  * Route yang menerima argumen tiket di akhir URL,
- * misal /akuifera/ruang-tunggu/AKF-20260424-0001
+ * misal /akuifera/status/AKF-20260424-0001
  */
 var TICKETED_ROUTES = {
   'status':        true,
-  'ruang-tunggu':  true,
-  'persiapan':     true,
-  'feedback':      true,
-  'laporan':       true
+  'feedback':      true
 };

@@ -91,10 +91,7 @@
       'admin':         'Panel Admin',
       'petugas':       'Panel Petugas',
       'pimpinan':      'Panel Pimpinan',
-      'ruang-tunggu':  'Ruang Tunggu Virtual',
-      'persiapan':     'Persiapan Konsultasi',
-      'feedback':      'Umpan Balik Konsultasi',
-      'laporan':       'Laporan Hasil Konsultasi'
+      'feedback':      'Umpan Balik Konsultasi'
     };
     var label = titles[slug] || titles[''];
     document.title = label + ' — Akuifera';
