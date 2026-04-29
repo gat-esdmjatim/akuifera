@@ -6,7 +6,7 @@
  *
  * Contoh: 'https://script.google.com/macros/s/AKfycbxXXXXXXXXXXXXXXXXXXXXXX/exec'
  */
-var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbySo9knYHIW5cCakhReFpxyhpF5GRzFmPttuYqZmUxfjfuL5OA-J69h1IKhNrYYt5BN4Q/exec';
+var APPS_SCRIPT_URL = 'PASTE_URL_/exec_DARI_APPS_SCRIPT_DI_SINI';
 
 /**
  * Path dasar dari halaman GitHub Pages.
@@ -20,13 +20,13 @@ var BASE_PATH = '/akuifera/';
  * Tambahkan / ubah jika Anda mengganti nama route.
  */
 var ROUTES = {
-  '':              'public',
-  'daftar':        'public',
-  'status':        'status',
-  'admin':         'admin',
-  'petugas':       'staff',
-  'pimpinan':      'leader',
-  'feedback':      'feedback'
+  '':                'public',
+  'daftar':          'public',
+  'status':          'status',
+  'admin':           'admin',
+  'petugas':         'staff',
+  'feedback':        'feedback',
+  'laporan-kinerja': 'laporan-kinerja'
 };
 
 /**
