@@ -6,7 +6,7 @@
  *
  * Contoh: 'https://script.google.com/macros/s/AKfycbxXXXXXXXXXXXXXXXXXXXXXX/exec'
  */
-var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxs9xzHtWSJuM88DZ7Jn_E_HLQl4xmMwjjNA4YADlWTwnVAliVMAtZopBHVl43vZntlEA/exec';
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyiBTLbDm09Tm-HYm-4zLLklyqbYLTulRfdLo_Ry-CXYxv0TqnCb64UD9LrD9JEY_OCXw/exec';
 
 /**
  * Path dasar dari halaman GitHub Pages.
