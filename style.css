@@ -11,7 +11,8 @@ html, body {
   position: fixed;
   inset: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100vh;      /* fallback browser lama */
+  height: 100dvh;     /* iOS/Android: tinggi viewport dinamis (tidak tertutup bar browser) */
   background: #f5f7fa;
 }
 
