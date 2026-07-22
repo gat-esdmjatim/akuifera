@@ -6,7 +6,7 @@
  *
  * Contoh: 'https://script.google.com/macros/s/AKfycbxXXXXXXXXXXXXXXXXXXXXXX/exec'
  */
-var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxoOHHcobSektgcKqQJ4JviN7DvP5sLN3Yzk5QrLfWViW8Sz_nrsswqXE-Ccg3YJ6nNQw/exec';
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzNHJ06a6hQ_AhBdGvCtymMp6HEW8ptJsKvkNvqgQHDgzhjbODGHSpswFhmXooQV0MBCg/exec';
 
 /**
  * Path dasar dari halaman GitHub Pages.
@@ -36,4 +36,13 @@ var ROUTES = {
 var TICKETED_ROUTES = {
   'status':        true,
   'feedback':      true
+};
+
+/**
+ * Pemetaan slug -> sub-tampilan (parameter ?view= pada Apps Script).
+ * Dipakai agar halaman "daftar" menampilkan FORMULIR konsultasi tatap muka,
+ * sedangkan halaman Beranda ('') menampilkan 3 pilihan layanan.
+ */
+var VIEW_MAP = {
+  'daftar': 'form'
 };
