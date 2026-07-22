@@ -42,27 +42,9 @@
 
     var page = ROUTES[slug];
     var hasTicket = !!TICKETED_ROUTES[slug] && !!ticket;
+    var view = (typeof VIEW_MAP !== 'undefined' && VIEW_MAP[slug]) ? VIEW_MAP[slug] : '';
 
-    // Kumpulkan query string tambahan dari URL pretty (mis. ?token=...&from=...&to=...)
-    // dan teruskan ke iframe Apps Script.
-    var extraQs = '';
-    var search = window.location.search || '';
-    if (search.length > 1) {
-      // Buang parameter yang sudah dipakai routing (page, ticket) untuk hindari duplikat
-      var pairs = search.substring(1).split('&');
-      var keep = [];
-      for (var i = 0; i < pairs.length; i++) {
-        var p = pairs[i];
-        if (!p) continue;
-        var eqIdx = p.indexOf('=');
-        var k = eqIdx === -1 ? p : p.substring(0, eqIdx);
-        if (k === 'page' || k === 'ticket') continue;
-        keep.push(p);
-      }
-      if (keep.length) extraQs = keep.join('&');
-    }
-
-    return { slug: slug, page: page, ticket: hasTicket ? ticket : '', extraQs: extraQs };
+    return { slug: slug, page: page, ticket: hasTicket ? ticket : '', view: view };
   }
 
   function buildIframeSrc(route) {
@@ -73,7 +55,7 @@
     var sep = url.indexOf('?') === -1 ? '?' : '&';
     var qs = 'page=' + encodeURIComponent(route.page);
     if (route.ticket) qs += '&ticket=' + encodeURIComponent(route.ticket);
-    if (route.extraQs) qs += '&' + route.extraQs;
+    if (route.view) qs += '&view=' + encodeURIComponent(route.view);
     return url + sep + qs;
   }
 
@@ -105,13 +87,13 @@
 
   function setPageTitle(slug) {
     var titles = {
-      '':                'Pendaftaran Konsultasi',
-      'daftar':          'Pendaftaran Konsultasi',
-      'status':          'Cek Status Konsultasi',
-      'admin':           'Panel Admin',
-      'petugas':         'Panel Petugas',
-      'feedback':        'Umpan Balik Konsultasi',
-      'laporan-kinerja': 'Laporan Kinerja Layanan Konsultasi'
+      '':              'Pendaftaran Konsultasi',
+      'daftar':        'Pendaftaran Konsultasi',
+      'status':        'Cek Status Konsultasi',
+      'admin':         'Panel Admin',
+      'petugas':       'Panel Petugas',
+      'pimpinan':      'Panel Pimpinan',
+      'feedback':      'Umpan Balik Konsultasi'
     };
     var label = titles[slug] || titles[''];
     document.title = label + ' — Akuifera';
