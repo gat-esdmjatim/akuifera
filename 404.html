@@ -8,11 +8,6 @@
   <link rel="stylesheet" href="/akuifera/style.css">
   <script src="/akuifera/config.js"></script>
   <script>
-    // Perbaikan Otomatis Trailing Slash untuk /admin, /beranda, /daftar, /petugas, dll.
-    if (window.location.pathname.length > 0 && !window.location.pathname.endsWith('/')) {
-      window.location.replace(window.location.origin + window.location.pathname + '/');
-    }
-
     // Setelah config dimuat, gunakan BASE_PATH agar wrapper bekerja walaupun
     // GitHub Pages mengarahkan deep-link ke 404.html.
     (function () {
