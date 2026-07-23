@@ -90,9 +90,9 @@
       '':              'Beranda',
       'daftar':        'Pendaftaran Konsultasi',
       'status':        'Cek Status Konsultasi',
-      'admin':         'Panel Admin',
-      'petugas':       'Panel Petugas',
-      'pimpinan':      'Panel Pimpinan',
+      'admin':         'Admin',
+      'petugas':       'Petugas',
+      'pimpinan':      'Pimpinan',
       'feedback':      'Umpan Balik Konsultasi'
     };
     var label = titles[slug] || titles[''];
