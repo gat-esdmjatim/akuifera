@@ -87,7 +87,7 @@
 
   function setPageTitle(slug) {
     var titles = {
-      '':              'Akuifera',
+      '':              'Beranda',
       'daftar':        'Pendaftaran Konsultasi',
       'status':        'Cek Status Konsultasi',
       'admin':         'Panel Admin',
