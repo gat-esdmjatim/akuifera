@@ -4,27 +4,102 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Akuifera</title>
-  <link rel="icon" type="image/png" href="/akuifera/favicon.png">
-  <link rel="stylesheet" href="/akuifera/style.css">
-  <script src="/akuifera/config.js"></script>
   <script>
-    // Setelah config dimuat, gunakan BASE_PATH agar wrapper bekerja walaupun
-    // GitHub Pages mengarahkan deep-link ke 404.html.
+    /* ============================================================
+     * PENTING — JANGAN memakai path absolut '/akuifera/...' di berkas ini.
+     * ------------------------------------------------------------
+     * GitHub Pages melayani berkas ini untuk SETIAP deep-link yang bukan
+     * berkas nyata, misalnya:
+     *     /status/GAT-20260725-312386
+     *     /feedback/GAT-20260725-312386
+     *
+     * Versi sebelumnya memuat '/akuifera/config.js' dan '/akuifera/app.js'.
+     * Setelah domain sendiri (www.akuifera.id) dipasang, segmen '/akuifera/'
+     * TIDAK ADA lagi — berkas berada di '/config.js' dan '/app.js'. Kedua
+     * skrip gagal dimuat sehingga halaman tampil KOSONG. Itulah sebab
+     * "Cek Status" dan "Umpan Balik" tidak tampil, sementara halaman lain
+     * (yang punya index.html sungguhan) tetap normal.
+     *
+     * Kini base path DICOBA BERJENJANG, bukan ditebak sekali:
+     *   1. '/'            -> untuk domain sendiri (www.akuifera.id)
+     *   2. '/akuifera/'   -> untuk gat-esdmjatim.github.io/akuifera/
+     *
+     * Dengan begitu berkas ini tetap bekerja pada kedua alamat, dan juga tetap
+     * bekerja bila setelan github_pages_url di Apps Script masih menyisakan
+     * segmen '/akuifera/' pada URL.
+     * ============================================================ */
     (function () {
-      try {
-        // Jika halaman ini dimuat akibat deep-link (mis. /akuifera/admin), kita
-        // mount langsung iframe sesuai dengan path saat ini.
-        var script = document.createElement('script');
-        script.src = '/akuifera/app.js';
-        document.head.appendChild(script);
-      } catch (e) {
-        // Fallback paling akhir: redirect ke root.
-        window.location.replace('/akuifera/');
+      var jalur = (window.location && window.location.pathname) || '/';
+      // Urutan percobaan. Bila path saat ini sudah berawalan /akuifera/,
+      // dahulukan itu supaya tidak ada permintaan yang pasti gagal.
+      var kandidat = /^\/akuifera(\/|$)/i.test(jalur)
+        ? ['/akuifera/', '/']
+        : ['/', '/akuifera/'];
+
+      function pasangAset(base) {
+        var css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = base + 'style.css';
+        document.head.appendChild(css);
+
+        var ikon = document.createElement('link');
+        ikon.rel = 'icon';
+        ikon.type = 'image/png';
+        ikon.href = base + 'favicon.png';
+        document.head.appendChild(ikon);
       }
+
+      function tampilkanGagal() {
+        var host = document.getElementById('akf-frame-host');
+        if (host) {
+          host.innerHTML =
+            '<div style="max-width:640px;margin:64px auto;padding:24px;' +
+            'font-family:system-ui,sans-serif;line-height:1.6;">' +
+            '<h2 style="margin:0 0 12px;">Halaman tidak dapat dimuat</h2>' +
+            '<p>Berkas <code>config.js</code> tidak ditemukan pada alamat ini.</p>' +
+            '<p>Silakan buka <a href="/">halaman utama</a>, atau hubungi ' +
+            'pengelola Bidang Geologi dan Air Tanah.</p></div>';
+        }
+      }
+
+      function coba(i) {
+        if (i >= kandidat.length) { tampilkanGagal(); return; }
+        var base = kandidat[i];
+        var s = document.createElement('script');
+        s.src = base + 'config.js';
+        s.onload = function () {
+          // CATATAN PENTING: JANGAN menimpa window.BASE_PATH di sini.
+          // Base path ASET (tempat config.js/app.js berada) dan base path RUTE
+          // (segmen yang harus dibuang dari URL) TIDAK selalu sama.
+          //
+          // Contoh: bila setelan github_pages_url di Apps Script masih
+          // menyisakan '/akuifera/', URL menjadi
+          //     www.akuifera.id/akuifera/status/GAT-...
+          // Asetnya ada di '/', tetapi segmen '/akuifera/' tetap harus dibuang
+          // saat menentukan rute. Menimpa BASE_PATH dengan '/' membuat
+          // parseRoute() membaca slug 'akuifera' yang tidak dikenal, lalu
+          // jatuh ke halaman pendaftaran — bukan halaman status.
+          //
+          // Nilai BASE_PATH '/akuifera/' dari config.js sudah menangani KEDUA
+          // bentuk URL, karena pembuangan segmennya bersyarat. Biarkan apa adanya.
+          window.AKF_BASE_ASET = base;
+          pasangAset(base);
+          // app.js membaca APPS_SCRIPT_URL dan ROUTES dari config.js, jadi
+          // urutannya WAJIB: config.js selesai dahulu, baru app.js.
+          var a = document.createElement('script');
+          a.src = base + 'app.js';
+          a.onerror = tampilkanGagal;
+          document.head.appendChild(a);
+        };
+        s.onerror = function () { coba(i + 1); };
+        document.head.appendChild(s);
+      }
+
+      coba(0);
     })();
   </script>
   <noscript>
-    <meta http-equiv="refresh" content="0; url=/akuifera/">
+    <meta http-equiv="refresh" content="0; url=/">
   </noscript>
 </head>
 <body>
